@@ -6,11 +6,11 @@
     margin: 30px;
 }
 .photo-card {
-    width: calc((100% - 60px)/4);
+    width: calc((100% - 60px)/5);
     height: 270px;
     padding: 8px;
 
-    background-color:#252525;
+    background-color:#cccbcb;
     border-radius: 8px;
     border: 2px solid crimson;
 }
@@ -26,8 +26,8 @@
     gap: 16px;
     justify-content: center;
     align-items: center;
-
-    &-item {
+}
+.info_item{
         display: flex;
         gap: 5px;
         flex-direction: column;
@@ -38,4 +38,3 @@
 
         font-size: 15px;
     }
-}

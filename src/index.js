@@ -1,4 +1,4 @@
-import { fetchPhotoCards } from './fetchPhotoCards';
+import { fetchCards } from './fetchCards';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -46,19 +46,19 @@ const renderCards = photoCards => {
     <img class="img" src="${webformatURL}" alt="${tags}" loading="lazy" />
   </a>
   <div class="info">
-    <p class="info-item">
+    <p class="info_item">
       <b>Likes</b>
       <span>${likes}</span>
     </p>
-    <p class="info-item">
+    <p class="info_item">
       <b>Views</b>
       <span>${views}</span>
     </p>
-    <p class="info-item">
+    <p class="info_item">
       <b>Comments</b>
       <span>${comments}</span>
     </p>
-    <p class="info-item">
+    <p class="info_item">
       <b>Downloads</b>
       <span>${downloads}</span>
     </p>
@@ -75,7 +75,7 @@ const removeCards = () => {
 
 const search = async searchQuery => {
   try {
-    const data = await fetchPhotoCards(searchQuery, page, per_page);
+    const data = await fetchCards(searchQuery, page, per_page);
     if (data.hits.length === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -103,6 +103,17 @@ const search = async searchQuery => {
   }
 };
 
+const scroll = () => {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
+};
+
 const onSearchClick = async e => {
   e.preventDefault();
   removeCards();
@@ -117,7 +128,7 @@ const onSearchClick = async e => {
 const onLoadMoreClick = async () => {
   const searchQuery = getSearchQuery();
   await search(searchQuery);
-  smoothScroll();
+  scroll();
 };
 
 refs.searchForm.addEventListener('submit', onSearchClick);

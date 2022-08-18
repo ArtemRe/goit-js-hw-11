@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchPhotoCards = async (searchQuery, page, per_page) => {
+export const fetchCards = async (searchQuery, page, per_page) => {
   const BASE_URL = 'https://pixabay.com/api/';
   const KEY = '29364351-4042f0090539e3343f354af9c';
 
